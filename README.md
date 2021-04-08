@@ -11,8 +11,8 @@ Theme requires conky with Lua support and additional Lua packages:
 
 For **Ubuntu** installation paste the following commands into terminal:
 ```
-sudo apt update;
-sudo apt instal lua5.1
+sudo apt update
+sudo apt install lua5.1
 sudo apt install luarocks
 sudo luarocks install lua-cjson 2.1.0
 sudo luarocks install luasocket
