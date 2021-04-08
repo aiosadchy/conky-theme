@@ -1,5 +1,5 @@
 conky.config = {
-    update_interval=1,
+    update_interval=10,
     update_interval_on_battery = 25,
     background=false,
     text_buffer_size=2048,
