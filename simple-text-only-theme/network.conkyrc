@@ -1,0 +1,51 @@
+conky.config = {
+    update_interval=2,
+    update_interval_on_battery = 5,
+    background=false,
+    text_buffer_size=2048,
+    double_buffer=true,
+
+    no_buffers=true,
+
+    use_xft=true,
+    font='FreeMono:pixelsize=13',
+
+    override_utf8_locale=true,
+    short_units=true,
+
+    draw_shades=true,
+    default_shade_color='000000',
+    draw_graph_borders=false,
+    border_inner_margin=5,
+    draw_borders=false,
+
+    own_window=true,
+    own_window_type='desktop',
+    own_window_transparent=true,
+    own_window_argb_visual=true,
+    own_window_hints='undecorated,below,sticky,skip_taskbar,skip_pager',
+
+    alignment = 'bottom_right',
+    gap_x = 5,
+    gap_y = 275,
+
+    cpu_avg_samples = 4,
+    net_avg_samples = 4,
+
+    minimum_width = 515,
+    minimum_height = 70,
+    maximum_width = 515
+};
+
+conky.text = [[
+${font FreeMono:style=bold:pixelsize=24}DWN${goto 270}UPL${font}
+${voffset -50}
+${goto 60}${downspeedgraph wlp7s0 45, 185}${goto 325}${upspeedgraph wlp7s0 45, 185}
+${voffset -34}
+${goto 61}_______________________${goto 326}_______________________
+${voffset -30}
+${downspeed wlp7s0}${goto 270}${upspeed wlp7s0}
+${voffset -8}
+${goto 270}IP (L):${alignr 10}${addr wlp7s0}
+${goto 270}IP (P):${alignr 10}${execi 300 dig @resolver4.opendns.com myip.opendns.com +short}
+]];

@@ -1,0 +1,53 @@
+conky.config = {
+    update_interval=1,
+    update_interval_on_battery = 25,
+    background=false,
+    text_buffer_size=2048,
+    double_buffer=true,
+
+    no_buffers=true,
+
+    use_xft=true,
+    font='FreeMono:pixelsize=13',
+
+    override_utf8_locale=true,
+    short_units=true,
+
+    draw_shades=true,
+    default_shade_color='000000',
+    draw_graph_borders=false,
+    border_inner_margin=5,
+    draw_borders=false,
+
+    own_window=true,
+    own_window_type='desktop',
+    own_window_transparent=true,
+    own_window_argb_visual=true,
+    own_window_hints='undecorated,below,sticky,skip_taskbar,skip_pager',
+
+    alignment = 'bottom_left',
+    gap_x = 5,
+    gap_y = 70,
+
+    cpu_avg_samples = 4,
+    net_avg_samples = 4,
+
+    lua_load = 'weather.lua',
+
+    minimum_width = 515,
+    minimum_height = 110,
+    maximum_width = 515
+};
+
+conky.text = [[
+${font FreeMono:style=bold:pixelsize=24}OUTSIDE: ${goto 140}${lua align 3 ${lua weather current temp temp}}°C, ${lua weather current weather.1.description}${font}
+${voffset -8}  _ ___ _____________ _______ ________ __ _ _
+${voffset -10}
+${goto 68}TODAY: ${goto 92}${lua align 15 ${lua weather 1 temp.min temp} to ${lua weather 1 temp.max temp}}, ${goto 237}${lua weather 1 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 2 dt date}}: ${goto 92}${lua align 15 ${lua weather 2 temp.min temp} to ${lua weather 2 temp.max temp}}, ${goto 237}${lua weather 2 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 3 dt date}}: ${goto 92}${lua align 15 ${lua weather 3 temp.min temp} to ${lua weather 3 temp.max temp}}, ${goto 237}${lua weather 3 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 4 dt date}}: ${goto 92}${lua align 15 ${lua weather 4 temp.min temp} to ${lua weather 4 temp.max temp}}, ${goto 237}${lua weather 4 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 5 dt date}}: ${goto 92}${lua align 15 ${lua weather 5 temp.min temp} to ${lua weather 5 temp.max temp}}, ${goto 237}${lua weather 5 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 6 dt date}}: ${goto 92}${lua align 15 ${lua weather 6 temp.min temp} to ${lua weather 6 temp.max temp}}, ${goto 237}${lua weather 6 weather.1.description}
+${goto 12}${lua align 12 ${lua weather 7 dt date}}: ${goto 92}${lua align 15 ${lua weather 7 temp.min temp} to ${lua weather 7 temp.max temp}}, ${goto 237}${lua weather 7 weather.1.description}
+]];
