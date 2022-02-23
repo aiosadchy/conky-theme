@@ -40,7 +40,7 @@ conky.config = {
 };
 
 conky.text = [[
-${font FreeMono:style=bold:pixelsize=24}OUTSIDE: ${goto 140}${lua align 3 ${lua weather current temp temp}}°C, ${lua weather current weather.1.description}${font}
+${font Arizone Unicase:pixelsize=15}OUTSIDE: ${goto 140}${lua align 3 ${lua weather current temp temp}} - ${lua weather current weather.1.description}${font}
 ${voffset -8}  _ ___ _____________ _______ ________ __ _ _
 ${voffset -10}
 ${goto 68}TODAY: ${goto 92}${lua align 15 ${lua weather 1 temp.min temp} to ${lua weather 1 temp.max temp}}, ${goto 237}${lua weather 1 weather.1.description}

@@ -38,22 +38,22 @@ conky.config = {
 };
 
 conky.text = [[
-${voffset -10}
-${font FreeMono:style=bold:pixelsize=24}CPU${font}
-${voffset -50}
-${goto 60}${cpugraph cpu0 30, 185}
-${voffset -34}
-${goto 61}_______________________
-${cpu cpu0}%${goto 61}${cpubar cpu0 8, 183}
 ${voffset -8}
-${top name  1}${alignr 10}${top cpu  1}%
-${top name  2}${alignr 10}${top cpu  2}%
-${top name  3}${alignr 10}${top cpu  3}%
-${top name  4}${alignr 10}${top cpu  4}%
-${top name  5}${alignr 10}${top cpu  5}%
-${top name  6}${alignr 10}${top cpu  6}%
-${top name  7}${alignr 10}${top cpu  7}%
-${top name  8}${alignr 10}${top cpu  8}%
-${top name  9}${alignr 10}${top cpu  9}%
-${top name 10}${alignr 10}${top cpu 10}%
+${font Arizone Unicase:pixelsize=15}CPU${font}
+${voffset -50}
+${goto 64}${cpugraph cpu0 30, 185}
+${voffset -34}
+${goto 65}_______________________
+${cpu cpu0}%${goto 65}${cpubar cpu0 8, 183}
+${voffset -8}
+${top name  1}${alignr 8}${top cpu  1}%
+${top name  2}${alignr 8}${top cpu  2}%
+${top name  3}${alignr 8}${top cpu  3}%
+${top name  4}${alignr 8}${top cpu  4}%
+${top name  5}${alignr 8}${top cpu  5}%
+${top name  6}${alignr 8}${top cpu  6}%
+${top name  7}${alignr 8}${top cpu  7}%
+${top name  8}${alignr 8}${top cpu  8}%
+${top name  9}${alignr 8}${top cpu  9}%
+${top name 10}${alignr 8}${top cpu 10}%
 ]];

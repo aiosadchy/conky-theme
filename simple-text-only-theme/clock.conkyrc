@@ -8,7 +8,7 @@ conky.config = {
     no_buffers=true,
 
     use_xft=true,
-    font='FreeMono:pixelsize=13',
+    font='Arizone Unicase:pixelsize=13',
 
     override_utf8_locale=true,
     short_units=true,
@@ -32,13 +32,14 @@ conky.config = {
     cpu_avg_samples = 4,
     net_avg_samples = 4,
 
-    minimum_width = 515,
+    minimum_width = 560,
     minimum_height = 300,
-    maximum_width = 515
+    maximum_width = 560
 };
 
 conky.text = [[
-${alignc}${font FreeMono:style=bold:pixelsize=170}${time %H:%M}${font}
-${alignc}${font FreeMono:style=bold:pixelsize=82}${time %d.%m.%Y}${font}
-${alignc}${font FreeMono:style=bold:pixelsize=80}${time %A}${font}
+${alignc}${font Arizone Unicase:pixelsize=90}${time %H:%M}${font}
+${alignc} ${font Arizone Unicase:pixelsize=53}${time %d.%m.%Y}${font}
+${voffset -15}
+${alignc}${font Arizone Unicase:pixelsize=40}${time %A}${font}
 ]];

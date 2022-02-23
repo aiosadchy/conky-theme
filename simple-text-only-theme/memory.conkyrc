@@ -38,22 +38,22 @@ conky.config = {
 };
 
 conky.text = [[
-${voffset -10}
-${font FreeMono:style=bold:pixelsize=24}RAM${font}
-${voffset -50}
-${goto 60}${memgraph 30, 185}
-${voffset -34}
-${goto 61}_______________________
-${mem}${goto 61}${membar 8, 183}
 ${voffset -8}
-${top_mem name  1}${alignr 10}${top_mem mem_res  1}
-${top_mem name  2}${alignr 10}${top_mem mem_res  2}
-${top_mem name  3}${alignr 10}${top_mem mem_res  3}
-${top_mem name  4}${alignr 10}${top_mem mem_res  4}
-${top_mem name  5}${alignr 10}${top_mem mem_res  5}
-${top_mem name  6}${alignr 10}${top_mem mem_res  6}
-${top_mem name  7}${alignr 10}${top_mem mem_res  7}
-${top_mem name  8}${alignr 10}${top_mem mem_res  8}
-${top_mem name  9}${alignr 10}${top_mem mem_res  9}
-${top_mem name 10}${alignr 10}${top_mem mem_res 10}
+${font Arizone Unicase:pixelsize=15}RAM${font}
+${voffset -50}
+${goto 64}${memgraph 30, 185}
+${voffset -34}
+${goto 65}_______________________
+${mem}${goto 65}${membar 8, 183}
+${voffset -8}
+${top_mem name  1}${alignr 8}${top_mem mem_res  1}
+${top_mem name  2}${alignr 8}${top_mem mem_res  2}
+${top_mem name  3}${alignr 8}${top_mem mem_res  3}
+${top_mem name  4}${alignr 8}${top_mem mem_res  4}
+${top_mem name  5}${alignr 8}${top_mem mem_res  5}
+${top_mem name  6}${alignr 8}${top_mem mem_res  6}
+${top_mem name  7}${alignr 8}${top_mem mem_res  7}
+${top_mem name  8}${alignr 8}${top_mem mem_res  8}
+${top_mem name  9}${alignr 8}${top_mem mem_res  9}
+${top_mem name 10}${alignr 8}${top_mem mem_res 10}
 ]];
