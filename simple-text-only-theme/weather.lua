@@ -1,3 +1,4 @@
+local utility = require("utility")
 local http = require("socket.http")
 
 package.path = './external/json.lua/?.lua;' .. package.path
@@ -8,21 +9,6 @@ local API_KEY_FILE = "config/openweathermap-api-key"
 
 
 local weather_report = nil
-
-
-function trim(str)
-    return string.gsub(str, "^%s*(.-)%s*$", "%1")
-end
-
-
-function file_exists(path)
-    local f = io.open(path, "r")
-    if f ~= nil then
-        io.close(f)
-        return true
-    end
-    return false
-end
 
 
 function get_seconds_since_midnight()
@@ -45,7 +31,7 @@ function get_api_key(path)
     local f = io.open(path, "r")
     local contents = f:read("*all")
     io.close(f)
-    return trim(contents)
+    return utility.trim(contents)
 end
 
 
@@ -71,7 +57,7 @@ end
 
 
 function need_to_update_report(path)
-    if (not file_exists(path)) then
+    if (not utility.file_exists(path)) then
         return true
     end
 
