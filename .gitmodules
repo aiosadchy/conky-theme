@@ -1,0 +1,3 @@
+[submodule "external/json.lua"]
+	path = external/json.lua
+	url = https://gist.github.com/59f4bcf316be525b30ab.git
