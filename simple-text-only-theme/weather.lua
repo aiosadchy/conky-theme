@@ -4,7 +4,7 @@ package.path = './external/json.lua/?.lua;' .. package.path
 local json = require("json")
 
 local WEATHER_REPORT_FILE = "/tmp/weather.json"
-local API_KEY_FILE = "openweathermap-api-key"
+local API_KEY_FILE = "config/openweathermap-api-key"
 
 
 local weather_report = nil
