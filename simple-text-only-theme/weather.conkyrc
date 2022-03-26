@@ -34,9 +34,9 @@ conky.config = {
 
     lua_load = 'weather.lua',
 
-    minimum_width = 515,
+    minimum_width = 550,
     minimum_height = 110,
-    maximum_width = 515
+    maximum_width = 550
 };
 
 conky.text = [[
