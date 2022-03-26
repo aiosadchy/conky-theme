@@ -1,6 +1,7 @@
 local http = require("socket.http")
-local json = require("cjson")
 
+package.path = './external/json.lua/?.lua;' .. package.path
+local json = require("json")
 
 local WEATHER_REPORT_FILE = "/tmp/weather.json"
 local API_KEY_FILE = "openweathermap-api-key"
@@ -50,7 +51,7 @@ end
 
 function get_location()
     local body, code = http.request("http://ip-api.com/json")
-    local response = json.decode(body)
+    local response = json.parse(body)
     return response["lat"], response["lon"]
 end
 
@@ -95,7 +96,7 @@ function update_weather_report(path, api_key_file)
     local f = io.open(path, "w")
     f:write(report)
     io.close(f)
-    weather_report = json.decode(report)
+    weather_report = json.parse(report)
 end
 
 
@@ -105,7 +106,7 @@ function refresh_weather_data()
     end
     if (weather_report == nil) then
         local f = io.open(WEATHER_REPORT_FILE, "r")
-        weather_report = json.decode(f:read("*all"))
+        weather_report = json.parse(f:read("*all"))
         io.close(f)
     end
 end
