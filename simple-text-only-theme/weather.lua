@@ -1,13 +1,12 @@
 local utility = require("utility")
-local http = require("socket.http")
 
-package.path = './external/json.lua/?.lua;' .. package.path
-local json = require("json")
+-- package.path = './third-party/?.lua;' .. package.path
 
-local WEATHER_REPORT_FILE = "/tmp/weather.json"
-local API_KEY_FILE = "config/openweathermap-api-key"
+local json = require("third-party/json")
 
-
+local tmp_directory = utility.getenv("TMP_DIRECTORY", "/tmp/")
+local weather_report_file = tmp_directory .. "/weather.json"
+local openweathermap_api_key = utility.getenv("WEATHER_OPENWEATHERMAP_API_KEY")
 local weather_report = nil
 
 
@@ -18,41 +17,30 @@ function get_seconds_since_midnight()
 end
 
 
-function get_file_age(path)
-    local command = "stat -c %Y " .. path
-    local handle = io.popen(command)
-    local file_timestamp = handle:read()
-    io.close(handle)
-    return os.difftime(os.time(), file_timestamp)
-end
-
-
-function get_api_key(path)
-    local f = io.open(path, "r")
-    local contents = f:read("*all")
-    io.close(f)
-    return utility.trim(contents)
+function get_api_key()
+    return openweathermap_api_key
 end
 
 
 function get_location()
-    local body, code = http.request("http://ip-api.com/json")
-    local response = json.parse(body)
+    -- TODO: support for custom location provider
+    local result = utility.curl("http://ip-api.com/json")
+    local response = json.parse(result)
     return response["lat"], response["lon"]
 end
 
 
-function get_weather_report(lat, lon, api_key)
+function get_weather_report(lat, lon)
     local request = "http://api.openweathermap.org"   ..
                     "/data/2.5/onecall"               ..
-                    "?appid=" .. api_key              ..
+                    "?appid=" .. get_api_key()        ..
                     "&lat="   .. lat                  ..
                     "&lon="   .. lon                  ..
                     "&exclude=minutely,hourly,alerts" ..
                     "&units=metric"                   ..
                     "&lang=en"
-    local body, code = http.request(request)
-    return body
+    local report = utility.curl(request)
+    return report
 end
 
 
@@ -61,12 +49,12 @@ function need_to_update_report(path)
         return true
     end
 
-    local file_age = get_file_age(path)
+    local file_age = utility.get_file_age(path)
     if (file_age > 3600 * 6) then
         return true
     end
 
-    daytime = get_seconds_since_midnight()
+    local daytime = get_seconds_since_midnight()
     if (file_age > daytime) then
         return true
     end
@@ -75,10 +63,9 @@ function need_to_update_report(path)
 end
 
 
-function update_weather_report(path, api_key_file)
-    local api_key = get_api_key(api_key_file)
+function update_weather_report(path)
     local lat, lon = get_location()
-    local report = get_weather_report(lat, lon, api_key)
+    local report = get_weather_report(lat, lon)
     local f = io.open(path, "w")
     f:write(report)
     io.close(f)
@@ -87,11 +74,11 @@ end
 
 
 function refresh_weather_data()
-    if (need_to_update_report(WEATHER_REPORT_FILE)) then
-        update_weather_report(WEATHER_REPORT_FILE, API_KEY_FILE)
+    if (need_to_update_report(weather_report_file)) then
+        update_weather_report(weather_report_file)
     end
     if (weather_report == nil) then
-        local f = io.open(WEATHER_REPORT_FILE, "r")
+        local f = io.open(weather_report_file, "r")
         weather_report = json.parse(f:read("*all"))
         io.close(f)
     end
@@ -129,9 +116,6 @@ function conky_weather(day, property, format)
 
     return data
 end
-
-
-
 
 
 function conky_align(format, ...)

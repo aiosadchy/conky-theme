@@ -32,6 +32,8 @@ conky.config = {
     cpu_avg_samples = 4,
     net_avg_samples = 4,
 
+    lua_load = 'network.lua',
+
     minimum_width = 515,
     minimum_height = 70,
     maximum_width = 515
@@ -40,12 +42,13 @@ conky.config = {
 conky.text = [[
 ${font Arizone Unicase:pixelsize=15}DWN${goto 270}UPL${font}
 ${voffset -50}
-${goto 64}${downspeedgraph wlp7s0 45, 185}${goto 329}${upspeedgraph wlp7s0 45, 185}
+${goto  64}${lua_graph downspeedgraph 45, 185 FFFFFF FFFFFF 0 -l}\
+${goto 329}${lua_graph upspeedgraph   45, 185 FFFFFF FFFFFF 0 -l}
 ${voffset -34}
 ${goto 65}_______________________${goto 330}_______________________
 ${voffset -30}
-${downspeed wlp7s0}${goto 270}${upspeed wlp7s0}
+${lua downspeed}${goto 270}${lua upspeed}
 ${voffset -8}
-${goto 270}IP (L):${alignr 8}${addr wlp7s0}
-${goto 270}IP (P):${alignr 8}${execi 300 dig @resolver4.opendns.com myip.opendns.com +short}
+${goto 270}IP (L):${alignr 8}${lua local_ip}
+${goto 270}IP (P):${alignr 8}${lua public_ip}
 ]];

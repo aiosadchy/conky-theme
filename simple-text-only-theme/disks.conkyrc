@@ -40,11 +40,12 @@ conky.config = {
 conky.text = [[
 ${font Arizone Unicase:pixelsize=15}IOR${goto 270}IOW${font}
 ${voffset -50}
-${goto 64}${diskiograph_read /dev/sda 45, 185}${goto 329}${diskiograph_write /dev/sda 45, 185}
+${goto  64}${diskiograph_read  45, 185}\
+${goto 329}${diskiograph_write 45, 185}
 ${voffset -34}
 ${goto 65}_______________________${goto 330}_______________________
 ${voffset -30}
-${diskio_read /dev/sda}${goto 270}${diskio_write /dev/sda}
+${diskio_read}${goto 270}${diskio_write}
 ${voffset -8}
 ${goto 270}Used:${goto 330}${fs_bar 8, 183 /}
 ${alignr 8}${fs_used /} / ${fs_size /} (${fs_used_perc /}%)
