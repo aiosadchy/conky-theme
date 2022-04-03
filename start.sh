@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 readonly SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 readonly SLEEP_TIME=${1:-"10"}

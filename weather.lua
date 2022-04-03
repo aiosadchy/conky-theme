@@ -1,7 +1,5 @@
 local utility = require("utility")
 
--- package.path = './third-party/?.lua;' .. package.path
-
 local json = require("third-party/json")
 
 local tmp_directory = utility.getenv("TMP_DIRECTORY", "/tmp/")
