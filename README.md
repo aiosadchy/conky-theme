@@ -12,6 +12,13 @@ with [Lua](https://www.lua.org/) support and [curl](https://curl.se/)
 You can install font by either executing `install.sh` or by manualy
 installing it any way you prefer.
 
+### Downloading
+
+You can simply download code or clone this repository with git:
+
+`git clone https://github.com/aiosadchy/conky-theme.git ~/.conky/conky-theme/`
+
+
 ### Configuration
 
 To enable weather forecasts, register a free API-key at
@@ -21,7 +28,7 @@ To enable weather forecasts, register a free API-key at
 You can also specify your primary network interface
 and an URL to fetch public IP address from as a variables in `configuration.env`.
 
-### Run
+## Run
 
 To display all the widgets, run `start.sh` or add it to your startup scripts.
 
@@ -29,7 +36,7 @@ Script first executes `sleep` command to make sure that everything is initialize
 before widgets appear, so don't worry if you don't see the widgets immediately.
 This delay can be controlled with an optional argument, so you can run it as follows:
 
-`start.sh <time in>`
+`start.sh <time in seconds>`
 
 ## Screenshots
 
