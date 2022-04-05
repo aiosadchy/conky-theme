@@ -40,6 +40,7 @@ conky.config = {
 };
 
 conky.text = [[
+${if_match ${lua is_weather_ready} == 1}\
 ${font Arizone Unicase:pixelsize=15}OUTSIDE: ${goto 140}${lua align 3 ${lua weather current temp temp}} - ${lua weather current weather.1.description}${font}
 ${voffset -8}  _ ___ _____________ _______ ________ __ _ _
 ${voffset -10}
@@ -50,4 +51,5 @@ ${goto 12}${lua align 12 ${lua weather 4 dt date}}: ${goto 92}${lua align 15 ${l
 ${goto 12}${lua align 12 ${lua weather 5 dt date}}: ${goto 92}${lua align 15 ${lua weather 5 temp.min temp} to ${lua weather 5 temp.max temp}}, ${goto 237}${lua weather 5 weather.1.description}
 ${goto 12}${lua align 12 ${lua weather 6 dt date}}: ${goto 92}${lua align 15 ${lua weather 6 temp.min temp} to ${lua weather 6 temp.max temp}}, ${goto 237}${lua weather 6 weather.1.description}
 ${goto 12}${lua align 12 ${lua weather 7 dt date}}: ${goto 92}${lua align 15 ${lua weather 7 temp.min temp} to ${lua weather 7 temp.max temp}}, ${goto 237}${lua weather 7 weather.1.description}
+${endif}\
 ]];

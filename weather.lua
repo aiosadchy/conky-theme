@@ -3,8 +3,8 @@ local utility = require("utility")
 local json = require("third-party/json")
 
 local tmp_directory = utility.getenv("TMP_DIRECTORY", "/tmp/")
-local weather_report_file = tmp_directory .. "/weather.json"
 local openweathermap_api_key = utility.getenv("WEATHER_OPENWEATHERMAP_API_KEY")
+local weather_report_file = tmp_directory .. "/weather.json"
 local weather_report = nil
 
 
@@ -42,13 +42,27 @@ function get_weather_report(lat, lon)
 end
 
 
+function is_report_incomplete()
+    return (weather_report == nil) or
+           (weather_report["current"] == nil)
+end
+
+
 function need_to_update_report(path)
+    if (weather_report == nil) then
+        return true
+    end
+
     if (not utility.file_exists(path)) then
         return true
     end
 
     local file_age = utility.get_file_age(path)
     if (file_age > 3600 * 6) then
+        return true
+    end
+
+    if (is_report_incomplete() and file_age > 120) then
         return true
     end
 
@@ -75,11 +89,20 @@ function refresh_weather_data()
     if (need_to_update_report(weather_report_file)) then
         update_weather_report(weather_report_file)
     end
-    if (weather_report == nil) then
+    if (is_report_incomplete()) then
         local f = io.open(weather_report_file, "r")
         weather_report = json.parse(f:read("*all"))
         io.close(f)
     end
+end
+
+
+function conky_is_weather_ready()
+    refresh_weather_data()
+    if is_report_incomplete() then
+        return 0
+    end
+    return 1
 end
 
 
