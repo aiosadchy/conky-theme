@@ -37,7 +37,7 @@ function get_weather_report(lat, lon)
                     "&exclude=minutely,hourly,alerts" ..
                     "&units=metric"                   ..
                     "&lang=en"
-    local report = utility.curl(request)
+    local report = utility.curl_update(request, 60 * 15)
     return report
 end
 
