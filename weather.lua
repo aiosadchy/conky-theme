@@ -4,7 +4,7 @@ local json = require("third-party/json")
 
 local tmp_directory = utility.getenv("TMP_DIRECTORY", "/tmp/")
 local openweathermap_api_key = utility.getenv("WEATHER_OPENWEATHERMAP_API_KEY")
-local weather_report_file = tmp_directory .. "/weather.json"
+local weather_report_file = tmp_directory .. "/" .. utility.getenv("USER", "") .. "-weather.json"
 local weather_report = nil
 
 
@@ -24,7 +24,7 @@ function get_location()
     -- TODO: support for custom location provider
     local result = utility.curl("http://ip-api.com/json")
     local response = json.parse(result)
-    return response["lat"], response["lon"]
+    return response["lat"] or "", response["lon"] or ""
 end
 
 
@@ -79,6 +79,9 @@ function update_weather_report(path)
     local lat, lon = get_location()
     local report = get_weather_report(lat, lon)
     local f = io.open(path, "w")
+    if (f == nil) then
+        return
+    end
     f:write(report)
     io.close(f)
     weather_report = json.parse(report)
@@ -89,11 +92,15 @@ function refresh_weather_data()
     if (need_to_update_report(weather_report_file)) then
         update_weather_report(weather_report_file)
     end
-    if (is_report_incomplete()) then
-        local f = io.open(weather_report_file, "r")
-        weather_report = json.parse(f:read("*all"))
-        io.close(f)
+    if (not is_report_incomplete()) then
+        return
     end
+    local f = io.open(weather_report_file, "r")
+    if (f == nil) then
+        return
+    end
+    weather_report = json.parse(f:read("*all"))
+    io.close(f)
 end
 
 
