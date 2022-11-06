@@ -20,6 +20,9 @@ function utility.get_file_age(path)
     -- TODO: do this in more portable way
     local command = "stat -c %Y " .. path
     local handle = io.popen(command)
+    if handle == nil then
+        return 0
+    end
     local file_timestamp = handle:read()
     io.close(handle)
     return os.difftime(os.time(), file_timestamp)
@@ -67,11 +70,11 @@ end
 
 function utility.curl(url)
     local tmp_directory = utility.getenv("TMP_DIRECTORY", "/tmp/")
-    local tmp_filename = url
+    local tmp_filename = utility.getenv("USER", "") .. url
     -- remove special characters from url to use it as a file name
     tmp_filename = string.gsub(tmp_filename, "[^%w]+", "-")
     -- add prefix and cut end to keep file name relatively short
-    tmp_filename = "lua-request-" .. string.sub(tmp_filename, 1, 32)
+    tmp_filename = "lua-req-" .. string.sub(tmp_filename, 1, 32)
     -- append full url hash to distinguish between different urls
     tmp_filename = tmp_filename .. "-" .. string.format("%08x", utility.hash(url))
     -- put it into temporary directory and attach an extension
